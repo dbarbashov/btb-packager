@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  btb-package:
+    build: .
+    volumes:
+      # Binance trade bot configs
+      - ./config/apprise.yml:/bot/binance-trade-bot/config/apprise.yml
+      - ./config/user.cfg:/bot/binance-trade-bot/user.cfg
+      - ./config/supported_coin_list:/bot/binance-trade-bot/supported_coin_list
+      # Telegram bot manager configs
+      - ./config/custom_scripts.json:/bot/BTB-manager-telegram/config/custom_scripts.json
+      # Chart plugin configs
+      - ./config/btb-chart-config:/bot/binance-chart-plugin-telegram-bot/config
+      # DB path
+      - ./data:/bot/binance-trade-bot/data
+      # Logs path
+      - ./logs/binance-trade-bot:/bot/binance-trade-bot/logs

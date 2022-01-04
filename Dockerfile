@@ -21,14 +21,16 @@ RUN $BINANCE_BOT_VERSION
 # Install bot requirements
 RUN pip3 install -r /bot/binance-trade-bot/requirements.txt
 # Put configs in their places
-COPY ./config/user.cfg /bot/binance-trade-bot/user.cfg
-COPY ./config/supported_coin_list /bot/binance-trade-bot/supported_coin_list
-COPY ./config/apprise.yml /bot/binance-trade-bot/config/apprise.yml
+COPY config_example/user.cfg /bot/binance-trade-bot/user.cfg
+COPY config_example/supported_coin_list /bot/binance-trade-bot/supported_coin_list
+COPY config_example/apprise.yml /bot/binance-trade-bot/config/apprise.yml
 
 # Clone telegram manager
 RUN git clone https://github.com/lorcalhost/BTB-manager-telegram.git
 # Install telegram manager requirements
 RUN pip3 install -r /bot/BTB-manager-telegram/requirements.txt
+# Copy custom scripts config
+COPY ./config_example/custom_scripts.json /bot/BTB-manager-telegram/config/custom_scripts.json
 # Copy custom scripts
 COPY ./custom_scripts /bot/BTB-manager-telegram/custom_scripts
 RUN chmod +x /bot/BTB-manager-telegram/custom_scripts/*.sh
@@ -37,8 +39,8 @@ RUN chmod +x /bot/BTB-manager-telegram/custom_scripts/*.sh
 RUN git clone https://github.com/marcozetaa/binance-chart-plugin-telegram-bot.git
 # Install its requirements
 RUN pip3 install -r /bot/binance-chart-plugin-telegram-bot/requirements.txt
-# Copy config
-COPY ./config/btb-chart-config /bot/binance-chart-plugin-telegram-bot/config
+# Copy config_example
+COPY config_example/btb-chart-config /bot/binance-chart-plugin-telegram-bot/config
 
 COPY ./entrypoint.sh /bot/entrypoint.sh
 
