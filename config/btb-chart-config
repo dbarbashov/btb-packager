@@ -1,0 +1,3 @@
+[config]
+bot_path=/bot/binance-trade-bot
+min_timestamp = 0
